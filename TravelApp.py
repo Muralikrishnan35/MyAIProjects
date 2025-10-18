@@ -3,7 +3,11 @@ from langchain_openai import ChatOpenAI
 import streamlit as st
 from langchain.prompts import PromptTemplate
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+#OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+api_key = st.text_input("Enter your API KEY", type="Password")
+if not api_key:
+    st.warning("enter your api key")
+    st.stop()
 
 llm = ChatOpenAI(model="gpt-5",api_key=OPENAI_API_KEY)
 prompt_template = PromptTemplate(
@@ -32,4 +36,5 @@ if city:
                                                  budget=budget
                                                  ))
     st.write(response.content)
+
     print(response)
